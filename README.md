@@ -23,7 +23,7 @@ Or install it yourself as:
 To access the API, you'll need to create a `Vultr::Client` and pass in your API key. You can find your API key at [https://my.vultr.com/settings](https://my.vultr.com/settings/#settingsapi)
 
 ```ruby
-client = Vultr::Client.new(api_key: ENV["VULTR_API_KEY"])
+$vultr = Vultr::Client.new(api_key: ENV["VULTR_API_KEY"])
 ```
 
 The client then gives you access to each of the resources.
@@ -39,7 +39,7 @@ Responses are created as objects like `Vultr::Account`. Having types like `Vultr
  `list` endpoints return pages of results. The result object will have a `data` key to access the results, as well as metadata like `next_cursor` and `prev_cursor` for retrieving the next and previous pages. You may also specify the
 
 ```ruby
-results = client.applications.list(per_page: 5)
+results = $vultr.applications.list(per_page: 5)
 #=> Vultr::Collection
 
 results.total
@@ -52,277 +52,277 @@ results.next_cursor
 #=> "bmV4dF9fMTU="
 
 # Retrieve the next page
-client.applications.list(per_page: 5, cursor: results.next_cursor)
+$vultr.applications.list(per_page: 5, cursor: results.next_cursor)
 #=> Vultr::Collection
 ```
 
 ### Account
 
 ```ruby
-client.account.info
+$vultr.account.info
 ```
 
 ### Applications
 
 ```ruby
-client.applications.list
+$vultr.applications.list
 ```
 
 ### Backups
 
 ```ruby
-client.backups.list
-client.backups.get(backup_id: "id")
+$vultr.backups.list
+$vultr.backups.get(backup_id: "id")
 ```
 
 ### Bare Metal
 
 ```ruby
-client.bare_metal.list
-client.bare_metal.create({})
-client.bare_metal.retrieve(baremetal_id: "id")
-client.bare_metal.update(baremetal_id: "id", {})
-client.bare_metal.delete(baremetal_id: "id")
-client.bare_metal.start(baremetal_id: "id")
-client.bare_metal.reboot(baremetal_id: "id")
-client.bare_metal.reinstall(baremetal_id: "id")
-client.bare_metal.halt(baremetal_id: "id")
-client.bare_metal.bandwidth(baremetal_id: "id")
-client.bare_metal.user_data(baremetal_id: "id")
-client.bare_metal.upgrades(baremetal_id: "id")
-client.bare_metal.vnc(baremetal_id: "id")
-client.bare_metal.list_ipv4(baremetal_id: "id")
-client.bare_metal.list_ipv6(baremetal_id: "id")
+$vultr.bare_metal.list
+$vultr.bare_metal.create({})
+$vultr.bare_metal.retrieve(baremetal_id: "id")
+$vultr.bare_metal.update(baremetal_id: "id", {})
+$vultr.bare_metal.delete(baremetal_id: "id")
+$vultr.bare_metal.start(baremetal_id: "id")
+$vultr.bare_metal.reboot(baremetal_id: "id")
+$vultr.bare_metal.reinstall(baremetal_id: "id")
+$vultr.bare_metal.halt(baremetal_id: "id")
+$vultr.bare_metal.bandwidth(baremetal_id: "id")
+$vultr.bare_metal.user_data(baremetal_id: "id")
+$vultr.bare_metal.upgrades(baremetal_id: "id")
+$vultr.bare_metal.vnc(baremetal_id: "id")
+$vultr.bare_metal.list_ipv4(baremetal_id: "id")
+$vultr.bare_metal.list_ipv6(baremetal_id: "id")
 
 # Bulk operations
-client.bare_metal.start_instances(baremetal_ids: [id1, id2])
-client.bare_metal.halt_instances(baremetal_ids: [id1, id2])
-client.bare_metal.reboot_instances(baremetal_ids: [id1, id2])
+$vultr.bare_metal.start_instances(baremetal_ids: [id1, id2])
+$vultr.bare_metal.halt_instances(baremetal_ids: [id1, id2])
+$vultr.bare_metal.reboot_instances(baremetal_ids: [id1, id2])
 ```
 
 ### Block Storage
 
 ```ruby
-client.block_storage.list
-client.block_storage.create({})
-client.block_storage.retrieve(block_id: "id")
-client.block_storage.update(block_id: "id", {})
-client.block_storage.delete(block_id: "id")
-client.block_storage.attach(block_id: "id", {})
-client.block_storage.detach(block_id: "id")
+$vultr.block_storage.list
+$vultr.block_storage.create({})
+$vultr.block_storage.retrieve(block_id: "id")
+$vultr.block_storage.update(block_id: "id", {})
+$vultr.block_storage.delete(block_id: "id")
+$vultr.block_storage.attach(block_id: "id", {})
+$vultr.block_storage.detach(block_id: "id")
 ```
 
 ### DNS (Domains)
 
 ```ruby
-client.dns.list
-client.dns.create({})
-client.dns.retrieve(dns_domain: "id")
-client.dns.update(dns_domain: "id", {})
-client.dns.delete(dns_domain: "id")
-client.dns.soa(dns_domain: "id")
-client.dns.update_soa(dns_domain: "id", {})
-client.dns.dnssec(dns_domain: "id")
-client.dns.list_records(dns_domain: "id")
-client.dns.retrieve_record(dns_domain: "id", record_id: "id")
-client.dns.create_record(dns_domain: "id", {})
-client.dns.update_record(dns_domain: "id", record_id: "id", {})
-client.dns.delete_record(dns_domain: "id", record_id: "id")
+$vultr.dns.list
+$vultr.dns.create({})
+$vultr.dns.retrieve(dns_domain: "id")
+$vultr.dns.update(dns_domain: "id", {})
+$vultr.dns.delete(dns_domain: "id")
+$vultr.dns.soa(dns_domain: "id")
+$vultr.dns.update_soa(dns_domain: "id", {})
+$vultr.dns.dnssec(dns_domain: "id")
+$vultr.dns.list_records(dns_domain: "id")
+$vultr.dns.retrieve_record(dns_domain: "id", record_id: "id")
+$vultr.dns.create_record(dns_domain: "id", {})
+$vultr.dns.update_record(dns_domain: "id", record_id: "id", {})
+$vultr.dns.delete_record(dns_domain: "id", record_id: "id")
 ```
 
 ### Firewall
 
 ```ruby
-client.firewall.list
-client.firewall.create({})
-client.firewall.retrieve(firewall_group_id: "id")
-client.firewall.update(firewall_group_id: "id", {})
-client.firewall.delete(firewall_group_id: "id")
-client.firewall.list_rules(firewall_group_id: "id")
-client.firewall.create_rule(firewall_group_id: "id", {})
-client.firewall.retrieve_rule(firewall_group_id: "id", firewall_rule_id: "id")
-client.firewall.delete_rule(firewall_group_id: "id", firewall_rule_id: "id")
+$vultr.firewall.list
+$vultr.firewall.create({})
+$vultr.firewall.retrieve(firewall_group_id: "id")
+$vultr.firewall.update(firewall_group_id: "id", {})
+$vultr.firewall.delete(firewall_group_id: "id")
+$vultr.firewall.list_rules(firewall_group_id: "id")
+$vultr.firewall.create_rule(firewall_group_id: "id", {})
+$vultr.firewall.retrieve_rule(firewall_group_id: "id", firewall_rule_id: "id")
+$vultr.firewall.delete_rule(firewall_group_id: "id", firewall_rule_id: "id")
 ```
 
 ### Instances
 
 ```ruby
-client.instances.list
-client.instances.create({})
-client.instances.retrieve(instance_id: "id")
-client.instances.update(instance_id: "id", {})
-client.instances.delete(instance_id: "id")
-client.instances.start(instance_id: "id")
-client.instances.reboot(instance_id: "id")
-client.instances.reinstall(instance_id: "id")
-client.instances.restore(instance_id: "id", {})
-client.instances.halt(instance_id: "id")
-client.instances.bandwidth(instance_id: "id")
-client.instances.neighbors(instance_id: "id")
-client.instances.user_data(instance_id: "id")
-client.instances.upgrades(instance_id: "id")
-client.instances.list_ipv4(instance_id: "id")
-client.instances.create_ipv4(instance_id: "id", {})
-client.instances.delete_ipv4(instance_id: "id", ipv4: "id")
-client.instances.create_ipv4_reverse(instance_id: "id", {})
-client.instances.set_default_reverse_dns_entry(instance_id: "id", {})
-client.instances.list_ipv6(instance_id: "id")
-client.instances.ipv6_reverse(instance_id: "id")
-client.instances.create_ipv6_reverse(instance_id: "id", {})
-client.instances.delete_ipv6_reverse(instance_id: "id", ipv6: "id")
-client.instances.list_private_networks(instance_id: "id")
-client.instances.attach_private_network(instance_id: "id", network_id: "id")
-client.instances.detach_private_network(instance_id: "id", network_id: "id")
-client.instances.iso(instance_id: "id")
-client.instances.attach_iso(instance_id: "id", iso_id: "id")
-client.instances.detach_iso(instance_id: "id", iso_id: "id")
-client.instances.backup_schedule(instance_id: "id")
-client.instances.set_backup_schedule(instance_id: "id", {})
+$vultr.instances.list
+$vultr.instances.create({})
+$vultr.instances.retrieve(instance_id: "id")
+$vultr.instances.update(instance_id: "id", {})
+$vultr.instances.delete(instance_id: "id")
+$vultr.instances.start(instance_id: "id")
+$vultr.instances.reboot(instance_id: "id")
+$vultr.instances.reinstall(instance_id: "id")
+$vultr.instances.restore(instance_id: "id", {})
+$vultr.instances.halt(instance_id: "id")
+$vultr.instances.bandwidth(instance_id: "id")
+$vultr.instances.neighbors(instance_id: "id")
+$vultr.instances.user_data(instance_id: "id")
+$vultr.instances.upgrades(instance_id: "id")
+$vultr.instances.list_ipv4(instance_id: "id")
+$vultr.instances.create_ipv4(instance_id: "id", {})
+$vultr.instances.delete_ipv4(instance_id: "id", ipv4: "id")
+$vultr.instances.create_ipv4_reverse(instance_id: "id", {})
+$vultr.instances.set_default_reverse_dns_entry(instance_id: "id", {})
+$vultr.instances.list_ipv6(instance_id: "id")
+$vultr.instances.ipv6_reverse(instance_id: "id")
+$vultr.instances.create_ipv6_reverse(instance_id: "id", {})
+$vultr.instances.delete_ipv6_reverse(instance_id: "id", ipv6: "id")
+$vultr.instances.list_private_networks(instance_id: "id")
+$vultr.instances.attach_private_network(instance_id: "id", network_id: "id")
+$vultr.instances.detach_private_network(instance_id: "id", network_id: "id")
+$vultr.instances.iso(instance_id: "id")
+$vultr.instances.attach_iso(instance_id: "id", iso_id: "id")
+$vultr.instances.detach_iso(instance_id: "id", iso_id: "id")
+$vultr.instances.backup_schedule(instance_id: "id")
+$vultr.instances.set_backup_schedule(instance_id: "id", {})
 
 # Bulk operations
-client.instances.start_instances(instance_ids: [id1, id2])
-client.instances.halt_instances(instance_ids: [id1, id2])
-client.instances.reboot_instances(instance_ids: [id1, id2])
+$vultr.instances.start_instances(instance_ids: [id1, id2])
+$vultr.instances.halt_instances(instance_ids: [id1, id2])
+$vultr.instances.reboot_instances(instance_ids: [id1, id2])
 ```
 
 ### ISO
 
 ```ruby
-client.iso.list
-client.iso.create({})
-client.iso.retrieve(iso_id: "id")
-client.iso.delete(iso_id: "id")
-client.iso.list_public
+$vultr.iso.list
+$vultr.iso.create({})
+$vultr.iso.retrieve(iso_id: "id")
+$vultr.iso.delete(iso_id: "id")
+$vultr.iso.list_public
 ```
 
 ### Kubernetes
 
 ```ruby
-client.kubernetes.list
-client.kubernetes.create({})
-client.kubernetes.retrieve(vke_id: "id")
-client.kubernetes.update(vke_id: "id", {})
-client.kubernetes.delete(vke_id: "id")
-client.kubernetes.config(vke_id: "id")
-client.kubernetes.list_resources(vke_id: "id")
-client.kubernetes.list_node_pools(vke_id: "id")
-client.kubernetes.retrieve_node_pool(vke_id: "id", nodepool_id: "id")
-client.kubernetes.create_node_pool(vke_id: "id", {})
-client.kubernetes.update_node_pool(vke_id: "id", nodepool_id: "id", {})
-client.kubernetes.delete_node_pool(vke_id: "id", nodepool_id: "id")
-client.kubernetes.delete_node_pool_instance(vke_id: "id", nodepool_id: "id", node_id: "id")
-client.kubernetes.recycle_node_pool_instance(vke_id: "id", nodepool_id: "id", node_id: "id")
+$vultr.kubernetes.list
+$vultr.kubernetes.create({})
+$vultr.kubernetes.retrieve(vke_id: "id")
+$vultr.kubernetes.update(vke_id: "id", {})
+$vultr.kubernetes.delete(vke_id: "id")
+$vultr.kubernetes.config(vke_id: "id")
+$vultr.kubernetes.list_resources(vke_id: "id")
+$vultr.kubernetes.list_node_pools(vke_id: "id")
+$vultr.kubernetes.retrieve_node_pool(vke_id: "id", nodepool_id: "id")
+$vultr.kubernetes.create_node_pool(vke_id: "id", {})
+$vultr.kubernetes.update_node_pool(vke_id: "id", nodepool_id: "id", {})
+$vultr.kubernetes.delete_node_pool(vke_id: "id", nodepool_id: "id")
+$vultr.kubernetes.delete_node_pool_instance(vke_id: "id", nodepool_id: "id", node_id: "id")
+$vultr.kubernetes.recycle_node_pool_instance(vke_id: "id", nodepool_id: "id", node_id: "id")
 ```
 
 ### Load Balancers
 
 ```ruby
-client.load_balancers.list
-client.load_balancers.create({})
-client.load_balancers.retrieve(load_balancer_id: "id")
-client.load_balancers.update(load_balancer_id: "id", {})
-client.load_balancers.delete(load_balancer_id: "id")
-client.load_balancers.list_forwarding_rules(load_balancer_id: "id")
-client.load_balancers.create_forwarding_rule(load_balancer_id: "id", {})
-client.load_balancers.retrieve_forwarding_rule(load_balancer_id: "id", forwarding_rule_id: "id")
-client.load_balancers.delete_forwarding_rule(load_balancer_id: "id", forwarding_rule_id: "id")
-client.load_balancers.list_firewall_rules(load_balancer_id: "id")
-client.load_balancers.retrieve_firewall_rule(load_balancer_id: "id", firewall_rule_id: "id")
+$vultr.load_balancers.list
+$vultr.load_balancers.create({})
+$vultr.load_balancers.retrieve(load_balancer_id: "id")
+$vultr.load_balancers.update(load_balancer_id: "id", {})
+$vultr.load_balancers.delete(load_balancer_id: "id")
+$vultr.load_balancers.list_forwarding_rules(load_balancer_id: "id")
+$vultr.load_balancers.create_forwarding_rule(load_balancer_id: "id", {})
+$vultr.load_balancers.retrieve_forwarding_rule(load_balancer_id: "id", forwarding_rule_id: "id")
+$vultr.load_balancers.delete_forwarding_rule(load_balancer_id: "id", forwarding_rule_id: "id")
+$vultr.load_balancers.list_firewall_rules(load_balancer_id: "id")
+$vultr.load_balancers.retrieve_firewall_rule(load_balancer_id: "id", firewall_rule_id: "id")
 ```
 
 ### Object Storage
 
 ```ruby
-client.object_storage.list
-client.object_storage.create({})
-client.object_storage.retrieve(object_storage_id: "id")
-client.object_storage.update(object_storage_id: "id", {})
-client.object_storage.delete(object_storage_id: "id")
-client.object_storage.regenerate_keys(object_storage_id: "id")
-client.object_storage.list_clusters()
+$vultr.object_storage.list
+$vultr.object_storage.create({})
+$vultr.object_storage.retrieve(object_storage_id: "id")
+$vultr.object_storage.update(object_storage_id: "id", {})
+$vultr.object_storage.delete(object_storage_id: "id")
+$vultr.object_storage.regenerate_keys(object_storage_id: "id")
+$vultr.object_storage.list_clusters()
 ```
 
 ### Operating Systems
 
 ```ruby
-client.operating_systems.list
+$vultr.operating_systems.list
 ```
 
 ### Plans
 
 ```ruby
-client.plans.list
-client.plans.list_metal
+$vultr.plans.list
+$vultr.plans.list_metal
 ```
 
 ### Private Networks
 
 ```ruby
-client.private_networks.list
-client.private_networks.create({})
-client.private_networks.retrieve(network_id: "id")
-client.private_networks.update(network_id: "id", {})
-client.private_networks.delete(network_id: "id")
+$vultr.private_networks.list
+$vultr.private_networks.create({})
+$vultr.private_networks.retrieve(network_id: "id")
+$vultr.private_networks.update(network_id: "id", {})
+$vultr.private_networks.delete(network_id: "id")
 ```
 
 ### Regions
 
 ```ruby
-client.regions.list
-client.regions.list_availability(region_id: "id")
+$vultr.regions.list
+$vultr.regions.list_availability(region_id: "id")
 ```
 
 ### Reserved IPs
 
 ```ruby
-client.reserved_ips.list
-client.reserved_ips.create({})
-client.reserved_ips.retrieve(reserved_ip: "id")
-client.reserved_ips.delete(reserved_ip: "id")
-client.reserved_ips.attach(reserved_ip: "id", instance_id: "id")
-client.reserved_ips.detach(reserved_ip: "id")
-client.reserved_ips.convert({})
+$vultr.reserved_ips.list
+$vultr.reserved_ips.create({})
+$vultr.reserved_ips.retrieve(reserved_ip: "id")
+$vultr.reserved_ips.delete(reserved_ip: "id")
+$vultr.reserved_ips.attach(reserved_ip: "id", instance_id: "id")
+$vultr.reserved_ips.detach(reserved_ip: "id")
+$vultr.reserved_ips.convert({})
 ```
 
 ### Snapshots
 
 ```ruby
-client.snapshots.list
-client.snapshots.create({})
-client.snapshots.retrieve(snapshot_id: "id")
-client.snapshots.create_from_url("https://...")
-client.snapshots.update(snapshot_id: "id", {})
-client.snapshots.delete(snapshot_id: "id")
+$vultr.snapshots.list
+$vultr.snapshots.create({})
+$vultr.snapshots.retrieve(snapshot_id: "id")
+$vultr.snapshots.create_from_url("https://...")
+$vultr.snapshots.update(snapshot_id: "id", {})
+$vultr.snapshots.delete(snapshot_id: "id")
 ```
 
 ### SSH Keys
 
 ```ruby
-client.ssh_keys.list
-client.ssh_keys.create({})
-client.ssh_keys.retrieve(ssh_key_id: "id")
-client.ssh_keys.update(ssh_key_id: "id", {})
-client.ssh_keys.delete(ssh_key_id: "id")
+$vultr.ssh_keys.list
+$vultr.ssh_keys.create({})
+$vultr.ssh_keys.retrieve(ssh_key_id: "id")
+$vultr.ssh_keys.update(ssh_key_id: "id", {})
+$vultr.ssh_keys.delete(ssh_key_id: "id")
 ```
 
 ### Startup Scripts
 
 ```ruby
-client.startup_scripts.list
-client.startup_scripts.create({})
-client.startup_scripts.retrieve(startup_script_id: "id")
-client.startup_scripts.update(startup_script_id: "id", {})
-client.startup_scripts.delete(startup_script_id: "id")
+$vultr.startup_scripts.list
+$vultr.startup_scripts.create({})
+$vultr.startup_scripts.retrieve(startup_script_id: "id")
+$vultr.startup_scripts.update(startup_script_id: "id", {})
+$vultr.startup_scripts.delete(startup_script_id: "id")
 ```
 
 ### Users
 
 ```ruby
-client.users.list
-client.users.create({})
-client.users.retrieve(user_id: "id")
-client.users.update(user_id: "id", {})
-client.users.delete(user_id: "id")
+$vultr.users.list
+$vultr.users.create({})
+$vultr.users.retrieve(user_id: "id")
+$vultr.users.update(user_id: "id", {})
+$vultr.users.delete(user_id: "id")
 ```
 
 ## Contributing
